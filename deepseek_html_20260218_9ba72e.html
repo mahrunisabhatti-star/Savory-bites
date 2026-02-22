@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Savory Bites | modern restaurant</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    }
+
+    body {
+      background-color: #fefaf5;
+      color: #2e2a28;
+      line-height: 1.5;
+    }
+
+    /* navigation */
+    .navbar {
+      background-color: #1e1b1a;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #f5c34d;
+    }
+    .logo span {
+      color: #fAf3e0;
+      font-weight: 300;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #f5ede3;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.2s;
+      padding: 0.5rem 0.2rem;
+    }
+    .nav-links a:hover {
+      color: #f5c34d;
+      border-bottom: 2px solid #f5c34d;
+    }
+
+    /* hero section */
+    .hero {
+      background: linear-gradient(rgba(20, 15, 10, 0.7), rgba(20, 15, 10, 0.5)),
+                  url('https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 2rem;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(2px);
+      padding: 3rem 2.5rem;
+      border-radius: 32px;
+    }
+    .hero-content h1 {
+      font-size: 4.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 6px #1a0f0a;
+    }
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+    .btn {
+      background-color: #f5c34d;
+      color: #1e1b1a;
+      border: none;
+      padding: 0.9rem 2.5rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.25s;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+      border: 1px solid #fad675;
+    }
+    .btn:hover {
+      background-color: #ffd966;
+      transform: scale(1.04);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    }
+
+    /* menu section */
+    .menu-section {
+      padding: 5rem 5% 4rem;
+      background-color: #fff8f0;
+      text-align: center;
+    }
+    .section-title {
+      font-size: 2.8rem;
+      color: #321f14;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: #f5c34d;
+      margin: 0.5rem auto 0;
+      border-radius: 4px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2.2rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .menu-card {
+      background: white;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.3s;
+      border: 1px solid #f0e1d0;
+    }
+    .menu-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 38px rgba(89, 45, 20, 0.15);
+    }
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 3px solid #f5c34d;
+    }
+    .card-content {
+      padding: 1.6rem 1.2rem 1.8rem;
+    }
+    .card-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #2c1c12;
+    }
+    .card-desc {
+      color: #5b4b3e;
+      margin: 0.8rem 0 1rem;
+      font-size: 1rem;
+    }
+    .price {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #b45f2b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+    .price small {
+      font-size: 1rem;
+      color: #6f5e50;
+      font-weight: 400;
+    }
+
+    /* reservation banner + interactive form */
+    .reserve-section {
+      background: linear-gradient(145deg, #29221c, #1f1915);
+      color: #faf0e1;
+      padding: 4rem 5%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+    }
+
+    .reserve-text {
+      flex: 1 1 280px;
+      max-width: 500px;
+    }
+    .reserve-text h2 {
+      font-size: 2.6rem;
+      margin-bottom: 0.5rem;
+      color: #fad57e;
+    }
+    .reserve-text p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+    .feature-icons i {
+      color: #f5c34d;
+      margin-right: 0.8rem;
+      font-size: 1.8rem;
+    }
+
+    .booking-card {
+      background: #fcf7f0;
+      color: #29221c;
+      padding: 2.2rem 2rem;
+      border-radius: 48px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+    }
+    .booking-card h3 {
+      font-size: 2rem;
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #2f231c;
+    }
+    .input-group {
+      margin-bottom: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+    .input-group label {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #3f2e23;
+    }
+    .input-group input {
+      padding: 0.9rem 1.2rem;
+      border: 1px solid #d0bcab;
+      border-radius: 40px;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.15s;
+    }
+    .input-group input:focus {
+      border-color: #f5c34d;
+      box-shadow: 0 0 0 3px rgba(245, 195, 77, 0.4);
+    }
+    .book-btn {
+      background: #f5c34d;
+      color: #1f150f;
+      font-weight: 700;
+      font-size: 1.4rem;
+      padding: 1rem;
+      width: 100%;
+      border: none;
+      border-radius: 60px;
+      margin-top: 0.8rem;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid #e5b13b;
+    }
+    .book-btn:hover {
+      background: #ffd966;
+      letter-spacing: 1px;
+    }
+    #bookingFeedback {
+      margin-top: 1.2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-align: center;
+      min-height: 2rem;
+      color: #1e7b4c;
+    }
+    .error-feedback {
+      color: #ba2d2d !important;
+    }
+
+    /* footer */
+    .footer {
+      background-color: #1e1b1a;
+      color: #ddd2c5;
+      padding: 2.5rem 5% 1.8rem;
+      text-align: center;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto 1.5rem;
+    }
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #f5c34d;
+    }
+    .social-links a {
+      color: #f5e3d0;
+      margin: 0 0.7rem;
+      font-size: 1.7rem;
+      transition: color 0.2s;
+    }
+    .social-links a:hover {
+      color: #f5c34d;
+    }
+    .copyright {
+      border-top: 1px solid #3b332e;
+      padding-top: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* responsiveness */
+    @media (max-width: 680px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .nav-links {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+      .reserve-section {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Savory<span>Bites</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#reservation">Reservation</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Flame · Spice · Soul</h1>
+      <p>✦ modern grill & comfort food ✦</p>
+      <button class="btn" id="exploreMenuBtn"><i class="fas fa-utensils"></i> explore menu</button>
+    </div>
+  </header>
+
+  <!-- menu section (static with JS enhance) -->
+  <section id="menu" class="menu-section">
+    <h2 class="section-title">signature dishes</h2>
+    <div class="menu-grid" id="menuGrid"></div>
+  </section>
+
+  <!-- reservation section with interactive javascript -->
+  <section id="reservation" class="reserve-section">
+    <div class="reserve-text">
+      <h2>reserve a table</h2>
+      <p>Enjoy an intimate dinner or a family feast. We save the best seats for you.</p>
+      <div class="feature-icons">
+        <i class="fas fa-wine-glass-alt"></i> curated wine list<br>
+        <i class="fas fa-birthday-cake"></i> celebrate with us<br>
+        <i class="fas fa-dog"></i> pet-friendly patio
+      </div>
+    </div>
+    <div class="booking-card">
+      <h3><i class="fas fa-calendar-check" style="color:#f5c34d;"></i> online booking</h3>
+      <div class="input-group">
+        <label for="name">Your name</label>
+        <input type="text" id="name" placeholder="e.g. John Parker" autocomplete="off">
+      </div>
+      <div class="input-group">
+        <label for="date">Date</label>
+        <input type="date" id="date">
+      </div>
+      <div class="input-group">
+        <label for="time">Time</label>
+        <input type="time" id="time" value="19:00">
+      </div>
+      <div class="input-group">
+        <label for="guests">Guests</label>
+        <input type="number" id="guests" min="1" max="20" value="2">
+      </div>
+      <button class="book-btn" id="bookBtn"><i class="fas fa-check-circle"></i> book now</button>
+      <div id="bookingFeedback"></div>
+    </div>
+  </section>
+
+  <footer id="contact" class="footer">
+    <div class="footer-container">
+      <span class="footer-logo">SavoryBites</span>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+      </div>
+      <address style="font-style: normal;">
+        <i class="fas fa-map-pin"></i> 42 gourmet street, foodie district<br>
+        <i class="fas fa-phone-alt"></i> (212) 555 9843
+      </address>
+    </div>
+    <div class="copyright">
+      © 2025 Savory Bites — handmade with <i class="fas fa-heart" style="color: #f5c34d;"></i> in every bite
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      // ---------- dynamic menu data ----------
+      const menuItems = [
+        {
+          img: 'https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=600',
+          name: 'Herb steak',
+          desc: 'grass‑fed striploin, rosemary garlic butter, roasted tomatoes',
+          price: 34
+        },
+        {
+          img: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=600',
+          name: 'truffle pasta',
+          desc: 'fettuccine, wild mushrooms, parmesan cream & black truffle',
+          price: 27
+        },
+        {
+          img: 'https://images.pexels.com/photos/327172/pexels-photo-327172.jpeg?auto=compress&cs=tinysrgb&w=600',
+          name: 'maple salmon',
+          desc: 'atlantic fillet, maple glaze, quinoa & grilled asparagus',
+          price: 31
+        },
+        {
+          img: 'https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg?auto=compress&cs=tinysrgb&w=600',
+          name: 'smash burger',
+          desc: 'double beef, cheddar, caramelized onion, brioche, house sauce',
+          price: 23
+        },
+        {
+          img: 'https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=600',
+          name: 'lamb chops',
+          desc: 'harissa marinade, mint yogurt, grilled vegetables',
+          price: 39
+        },
+        {
+          img: 'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600',
+          name: 'tiramisu',
+          desc: 'classic italian dessert, mascarpone & espresso (serves 2)',
+          price: 16
+        }
+      ];
+
+      const menuGrid = document.getElementById('menuGrid');
+      if (menuGrid) {
+        menuItems.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'menu-card';
+          card.innerHTML = `
+            <img class="card-img" src="${item.img}" alt="${item.name}" loading="lazy">
+            <div class="card-content">
+              <div class="card-title">${item.name}</div>
+              <div class="card-desc">${item.desc}</div>
+              <div class="price"><small>$</small>${item.price}</div>
+            </div>
+          `;
+          menuGrid.appendChild(card);
+        });
+      }
+
+      // ---------- interactive reservation (javascript) ----------
+      const bookBtn = document.getElementById('bookBtn');
+      const nameInput = document.getElementById('name');
+      const dateInput = document.getElementById('date');
+      const timeInput = document.getElementById('time');
+      const guestsInput = document.getElementById('guests');
+      const feedbackDiv = document.getElementById('bookingFeedback');
+
+      // set minimum date to today (avoid past)
+      const today = new Date().toISOString().split('T')[0];
+      if (dateInput) {
+        dateInput.setAttribute('min', today);
+        dateInput.value = today;  // default today
+      }
+
+      // helper to validate
+      function validateBooking(name, date, time, guests) {
+        if (!name || name.trim().length < 2) return 'Please enter a valid name (at least 2 letters).';
+        if (!date) return 'Pick a reservation date.';
+        if (!time) return 'Select a time.';
+        if (guests < 1 || guests > 20) return 'Guests must be between 1 and 20.';
+        // optional: check if date is not past (already prevented by min, but user could manually edit)
+        const selectedDate = new Date(date);
+        const now = new Date();
+        now.setHours(0,0,0,0);
+        if (selectedDate < now) return 'Cannot book a date in the past.';
+        return '';
+      }
+
+      if (bookBtn) {
+        bookBtn.addEventListener('click', function(e) {
+          e.preventDefault();  // avoid any form-like behaviour
+
+          const name = nameInput ? nameInput.value.trim() : '';
+          const date = dateInput ? dateInput.value : '';
+          const time = timeInput ? timeInput.value : '';
+          const guests = guestsInput ? parseInt(guestsInput.value, 10) : 1;
+
+          const error = validateBooking(name, date, time, guests);
+          if (error) {
+            feedbackDiv.textContent = '⚠️ ' + error;
+            feedbackDiv.className = 'error-feedback';
+            return;
+          }
+
+          // format nicely
+          const formattedDate = new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          const [hour, minute] = time.split(':');
+          const ampm = hour >= 12 ? 'PM' : 'AM';
+          const hour12 = hour % 12 || 12;
+          const timeDisplay = `${hour12}:${minute} ${ampm}`;
+
+          // success message
+          feedbackDiv.innerHTML = `✅ confirmed, ${name}! table for ${guests} on ${formattedDate} at ${timeDisplay}. see you soon 🍽️`;
+          feedbackDiv.className = ''; // remove error style
+
+          // (optional) clear sensitive fields – but we keep them for demonstration; you could reset, but we leave data.
+          // nameInput.value = ''; // (commented – we keep data so user sees what they booked)
+          // bonus: small animation on booking card
+          const bookingCard = document.querySelector('.booking-card');
+          if (bookingCard) {
+            bookingCard.style.transition = 'box-shadow 0.2s';
+            bookingCard.style.boxShadow = '0 0 0 3px #f5c34d, 0 20px 30px rgba(0,0,0,0.5)';
+            setTimeout(() => bookingCard.style.boxShadow = '0 20px 30px rgba(0,0,0,0.5)', 300);
+          }
+        });
+      }
+
+      // bonus: scroll to menu when clicking the hero button
+      const exploreBtn = document.getElementById('exploreMenuBtn');
+      if (exploreBtn) {
+        exploreBtn.addEventListener('click', () => {
+          document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+
+      // small improvement: year in footer dynamic (optional)
+      const copyright = document.querySelector('.copyright');
+      if (copyright) {
+        const currentYear = new Date().getFullYear();
+        copyright.innerHTML = copyright.innerHTML.replace('2025', currentYear);
+      }
+    })();
+  </script>
+  <!-- extra fallback for image alt, all good -->
+</body>
+</html>
